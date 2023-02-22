@@ -5,7 +5,7 @@ import {MdDelete} from "react-icons/md"
 export default function ExpenseList(props) {
   
     const expensesElements = props.expenses.map(expense => {
-        return <ExpenseItem key={expense.id}id={expense.id} charge={expense.charge} amount={expense.amount}/> 
+        return <ExpenseItem key={expense.id} expense={expense}/> 
     })
 
     return (
