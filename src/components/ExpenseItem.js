@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react'
 
-export default function ExpenseItem() {
-  return (
+export default function ExpenseItem({expense}) {
+  
+  
+    return (
     <div>
-      Expense Item
+      
     </div>
   )
 }
