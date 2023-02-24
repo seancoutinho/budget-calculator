@@ -12,6 +12,7 @@ export default function ExpenseForm(props) {
             className="form-control"
             id="charge"
             name="charge"
+            value={props.charge}
             placeholder="e.g rent"
             onChange={props.captureCharge}
           />
@@ -19,10 +20,11 @@ export default function ExpenseForm(props) {
         <div className="form-group">
           <label htmlFor="amount">amount</label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="amount"
             name="amount"
+            value={props.amount}
             placeholder="e.g 100"
             onChange={props.captureAmount}
           />

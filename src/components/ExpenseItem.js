@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {MdEdit, MdDelete, MdDeleteOutline} from "react-icons/md"
+import React from 'react'
+import {MdEdit, MdDeleteOutline} from "react-icons/md"
 
 export default function ExpenseItem({expense}) {
     const {id, charge, amount} = expense

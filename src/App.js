@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { nanoid } from 'nanoid';
 import ExpenseList from "./components/ExpenseList"
 import Alert from "./components/Alert"
@@ -26,19 +26,31 @@ const [expenses, setExpenses] = useState([
     setAmount(event.target.value)
   }
    
+  //This function adds a new expense to the expenses array
   function onSubmit(event) {
     event.preventDefault()
-    setExpenses(prevExpenses => {
-      return [
-        ...prevExpenses,
-        {
-          id: nanoid(),
-          charge: charge,
-          amount: parseInt(amount)
-        }
-      ]
+    if (charge !== "" && amount >0) {
+      setExpenses(prevExpenses => {
+        return [
+          ...prevExpenses,
+          {
+            id: nanoid(),
+            charge,
+            amount: parseInt(amount)
+          }
+        ]
+      })
+      setCharge("")
+      setAmount("")
+    } else {
+      //handle Alert
+      <Alert />
+    } 
+    
+  }
 
-    })
+  function clearExpenses() {
+    setExpenses([])
   }
   
   return (
@@ -46,8 +58,8 @@ const [expenses, setExpenses] = useState([
       <Alert />
       <h1>Budget Calculator</h1>
       <main className="App">
-        <ExpenseForm captureCharge={captureCharge} captureAmount={captureAmount} onSubmit ={onSubmit}/>
-        <ExpenseList expenses={expenses}/>
+        <ExpenseForm charge={charge} amount={amount} captureCharge={captureCharge} captureAmount={captureAmount} onSubmit ={onSubmit}/>
+        <ExpenseList clearExpenses={clearExpenses} expenses={expenses}/>
       </main>
       <h1>Total Spending: <span className="total">
         $ {expenses.reduce((acc, curr) => {
