@@ -1,9 +1,7 @@
 import React from 'react'
 
-export default function Alert(props) {
+export default function Alert({type, text}) {
   return (
-    <div className='alert'>
-      
-    </div>
+  <h1 className={`alert alert-${type}`}>{text}</h1>
   )
 }

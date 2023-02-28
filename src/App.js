@@ -14,17 +14,27 @@ const [expenses, setExpenses] = useState([
     {id: nanoid(), charge: "credit card bill", amount: 1200}
   ])
 
-  console.log(expenses);
   const [charge, setCharge] = useState('')
   const [amount, setAmount] = useState(0)
+  const [alert, setAlert] = useState({show:false})
 
+    //Handles the capturing of the charge
   function captureCharge(event) {
     setCharge(event.target.value)
   }
 
+   //handles the capture of the expense amount
   function captureAmount(event) {
     setAmount(event.target.value)
   }
+
+    //handles the alert display 
+  function handleAlert(type, text) {
+    setAlert({show: true,type,text});
+    setTimeout(() => {
+      setAlert({show: false})
+    }, 4000)
+    }
    
   //This function adds a new expense to the expenses array
   function onSubmit(event) {
@@ -42,9 +52,9 @@ const [expenses, setExpenses] = useState([
       })
       setCharge("")
       setAmount("")
+      handleAlert({type:'success', text:'Item Added'})
     } else {
-      //handle Alert
-      <Alert />
+      handleAlert({type:'danger', text:"Amount should be greater than zero and Charge should not be empty"})
     } 
     
   }
@@ -55,7 +65,7 @@ const [expenses, setExpenses] = useState([
   
   return (
     <>
-      <Alert />
+      {alert.show && <Alert type={alert.type} text={alert.text} />}
       <h1>Budget Calculator</h1>
       <main className="App">
         <ExpenseForm charge={charge} amount={amount} captureCharge={captureCharge} captureAmount={captureAmount} onSubmit ={onSubmit}/>
